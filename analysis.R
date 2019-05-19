@@ -1,14 +1,3 @@
----
-title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: yes
----
-
-
-## Loading and preprocessing the data
-
-```{r}
 library(dplyr)
 
 # decompress zip file
@@ -18,11 +7,9 @@ act_data <- read.csv("activity.csv", header = TRUE, sep = ",", na.strings = "NA"
 # convert date character column to date
 act_data$date <- as.Date.character(act_data$date,"%Y-%m-%d")
 
-```
 
 
-## What is mean total number of steps taken per day?
-```{r}
+
 # aggregate steps by day
 act_data_tot_day <- act_data %>% group_by(date) %>% summarize(steps=sum(steps))
 # plot the histogram
@@ -33,12 +20,10 @@ mean(act_data_tot_day$steps, na.rm = TRUE)
 
 # calculate median
 median(act_data_tot_day$steps, na.rm = TRUE)
-```
 
 
 
-## What is the average daily activity pattern?
-```{r}
+
 # calculate step mean for each interval
 act_data_int <- act_data %>% group_by(interval) %>% summarize(steps=mean(steps, na.rm = TRUE))
 # plot the time-series chart showing 5-minute interval and mean of steps.
@@ -46,12 +31,10 @@ plot(act_data_int$interval, act_data_int$steps, type = "l", xlab= "5-Minute Inte
 
 # return the interval with maximum number of steps
 act_data_int[max(act_data_int$steps) == act_data_int$steps,]$interval
-```
 
 
 
-## Imputing missing values
-```{r}
+
 # return the NA quantity in step variable
 sum(is.na(act_data$steps))
 # for the NA values for Steps use the steps mean for the inverval (already calculated in act_data_int)
@@ -72,11 +55,8 @@ hist(act_data_adj_day$steps, xlab = "Steps", main = "Frequency of number of step
 mean(act_data_adj_day$steps, na.rm = TRUE)
 # calculate median
 median(act_data_adj_day$steps, na.rm = TRUE)
-```
 
 
-## Are there differences in activity patterns between weekdays and weekends?
-```{r}
 # set locale to US
 Sys.setlocale(category = "LC_TIME", locale = "US")
 # define Weekday or Weekend for each record
@@ -87,5 +67,3 @@ act_data_int_dt <- act_data_adj %>% group_by(interval, day_type) %>% summarize(s
 # plot the time-series chart showing 5-minute interval and mean of steps per day type
 library(lattice)
 xyplot(steps ~ interval | day_type, data = act_data_int_dt, layout = c(1, 2), type = "l", xlab = "Interval", ylab = "Steps(mean)", main = "Activity patterns between weekdays and weekends")
-```
-

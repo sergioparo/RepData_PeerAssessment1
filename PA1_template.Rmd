@@ -2,7 +2,9 @@
 title: "Reproducible Research: Peer Assessment 1"
 output: 
   html_document:
+    highlight: tango
     keep_md: yes
+    theme: journal
 ---
 
 

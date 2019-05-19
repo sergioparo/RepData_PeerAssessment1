@@ -1,11 +1,11 @@
 ---
-title: "Reproducible Research: Peer Assessment 1"
 output: 
-  html_document:
-    highlight: tango
+  html_document: 
     keep_md: yes
-    theme: journal
 ---
+# Reproducible Research: Peer Assessment 1 
+### Author: Sérgio Paro
+
 
 
 ## Loading and preprocessing the data
